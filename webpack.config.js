@@ -169,3 +169,215 @@ if (isProd) {
                 'tests': ['webpack/hot/poll?100', './tests-index.js'],
             }, [new webpack.HotModuleReplacementPlugin()])
 }
+npm init -y
+npm install --save-dev webpack webpack-cli webpack-dev-server
+npm install --save-dev babel-loader @babel/core @babel/preset-env css-loader style-loader
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js', // Your entry file
+  output: {
+    filename: 'bundle.js',  // The output file after Webpack compiles
+    path: path.resolve(__dirname, 'dist'), // Output directory
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/, // Transpile JS files using Babel
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+      {
+        test: /\.css$/, // Use CSS loaders
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000,
+  },
+  mode: 'development',  // Or 'production' for production builds
+};
+/src
+  index.js
+  style.css
+import './style.css';
+
+console.log('Hello from Webpack!');
+body {
+  background-color: lightblue;
+}
+body {
+  background-color: lightblue;
+}
+"scripts": {
+  "start": "webpack serve --open",
+  "build": "webpack --mode production"
+}
+git init
+git add .
+git commit -m "Initial commit with Webpack setup"
+git branch -M main
+git remote add origin https://github.com/yourusername/yourrepository.git
+git push -u origin main
+node_modules/
+dist/
+npm install --save-dev gh-pages
+"scripts": {
+  "start": "webpack serve --open",
+  "build": "webpack --mode production",
+  "deploy": "gh-pages -d dist"
+}
+npm run deploy
+npm run deploy
+npm run deploy
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',  // Handles image files as assets
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',  // Handles font files as assets
+      },
+    ],
+  },
+  mode: 'development',
+};
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',   // Inject styles into DOM
+          'css-loader',     // Turns CSS into JS
+          'sass-loader',    // Compiles Sass to CSS
+        ],
+      },
+    ],
+  },
+  mode: 'development',
+};
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader, // Extract CSS to a separate file
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,  // Extract CSS
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+  optimization: {
+    minimize: true,  // Enable code minification
+    minimizer: [
+      new TerserWebpackPlugin(),  // Minify JavaScript
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
+  ],
+  mode: 'production',
+};
+const webpack = require('webpack');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    }),
+  ],
+  mode: 'development', // or 'production'
+};
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  devServer: {
+    contentBase: './dist',
+    hot: true,  // Enable HMR
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),  // Enable HMR plugin
+  ],
+  mode: 'development',
+};
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  devtool: 'source-map',  // Generates a source map
+  mode: 'development',
+};
